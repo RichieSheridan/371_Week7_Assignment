@@ -17,7 +17,6 @@ fun gpaappFun(navController: NavController) {
     var grade2 by remember { mutableStateOf("") }
     var grade3 by remember { mutableStateOf("") }
 
-
     // Declare variables for GPA result and background color
     var gpa by remember { mutableStateOf("") }
     var backColor by remember { mutableStateOf(Color.White) }
@@ -45,7 +44,6 @@ fun gpaappFun(navController: NavController) {
             onValueChange = { grade3 = it },
             label = { Text("Course 3 Grade") },
         )
-
 
         Button(onClick = {
             if (btnLabel == "Compute GPA") {
@@ -77,11 +75,16 @@ fun gpaappFun(navController: NavController) {
             Text(btnLabel)
         }
 
-
         if (gpa.isNotEmpty()) {
             Text(text = "GPA: $gpa")
         }
 
+        //Button I added
+        Button(onClick = {
+            navController.navigate("second_screen")
+        }) {
+            Text("Go Back to Home")
+        }
 
     }
 }

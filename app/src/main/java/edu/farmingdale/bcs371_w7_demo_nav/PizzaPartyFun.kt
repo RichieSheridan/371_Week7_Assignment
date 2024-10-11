@@ -35,7 +35,7 @@ import kotlin.math.ceil
 
 // ToDo 9: make this composable navigatable and then add a button to navigate to the GPA calculator
 @Composable
-fun PizzaPartyScreen( modifier: Modifier = Modifier) {
+fun PizzaPartyScreen(navController: NavController, modifier: Modifier = Modifier) {
     var totalPizzas by remember { mutableIntStateOf(0) }
     var numPeopleInput by remember { mutableStateOf("") }
     var hungerLevel by remember { mutableStateOf("Medium") }
@@ -52,7 +52,9 @@ fun PizzaPartyScreen( modifier: Modifier = Modifier) {
             labelText = "Number of people?",
             textInput = numPeopleInput,
             onValueChange = { numPeopleInput = it },
-            modifier = modifier.padding(bottom = 16.dp).fillMaxWidth()
+            modifier = modifier
+                .padding(bottom = 16.dp)
+                .fillMaxWidth()
         )
         RadioGroup(
             labelText = "How hungry?",
@@ -61,23 +63,32 @@ fun PizzaPartyScreen( modifier: Modifier = Modifier) {
             onSelected = { hungerLevel = it },
             modifier = modifier
         )
-        Text(
-            text = "Total pizzas: $totalPizzas",
-            fontSize = 22.sp,
-            modifier = modifier.padding(top = 16.dp, bottom = 16.dp)
-        )
         Button(
-            onClick = {            totalPizzas = calculateNumPizzas(numPeopleInput.toInt(),
-                hungerLevel)
-
+            onClick = {
+                totalPizzas = calculateNumPizzas(
+                    numPeopleInput.toIntOrNull() ?: 0,
+                    hungerLevel
+                )
             },
             modifier = modifier.fillMaxWidth()
         ) {
             Text("Calculate")
         }
-
+        Text(
+            text = "Total pizzas: $totalPizzas",
+            fontSize = 22.sp,
+            modifier = modifier.padding(top = 16.dp, bottom = 16.dp)
+        )
+        //GPA Calc Button
+        Button(
+            onClick = { navController.navigate("app_screen") },
+            modifier = modifier.fillMaxWidth()
+        ) {
+            Text("Go to GPA Calculator")
+        }
     }
 }
+
 
 @Composable
 fun NumberField(

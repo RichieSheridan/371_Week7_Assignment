@@ -44,9 +44,7 @@ class MainActivity : ComponentActivity() {
             BCS371_W7_Demo_NavTheme {
                 Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().background(
                     Color(0xFFE0E0E0)
-                )) {
-                    Navigation()
-                }
+                )) { Navigation() }
             }
         }
     }
